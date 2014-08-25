@@ -27,16 +27,17 @@ let max_multiply n =
   let digits: int list = List.map ~f:int_of_string (Str.split (Str.regexp "") data) in
     let rec find_max_multiple current rest max = match current, rest with
       | ([], hd::tl) -> find_max_multiple [hd] tl max
-      | (current, []) ->  let seq_product = product current in
-          if seq_product > max
-          then seq_product
+      | (current, []) ->  let current_product = product current in
+          if current_product > max
+          then current_product
           else max
-      | (seq, l_hd::l_tl) when (List.length seq) < n -> find_max_multiple (seq@[l_hd]) l_tl max
-      | (seq_hd::seq_tl, l_hd::l_tl) ->
-        let seq_product = product (seq_hd::seq_tl) in
-          if seq_product > max
-          then find_max_multiple (seq_tl@[l_hd]) l_tl seq_product
-          else find_max_multiple (seq_tl@[l_hd]) l_tl max
+      | (current, rest_hd::rest_tl) when (List.length current) < n ->
+        find_max_multiple (current@[rest_hd]) rest_tl max
+      | (cur_hd::cur_tl, rest_hd::rest_tl) ->
+        let current_product = product (cur_hd::cur_tl) in
+          if current_product > max
+          then find_max_multiple (cur_tl@[rest_hd]) rest_tl current_product
+          else find_max_multiple (cur_tl@[rest_hd]) rest_tl max
     in
       find_max_multiple [] digits 0
 
