@@ -24,7 +24,7 @@ let data = "73167176531330624919225119674426574742355349194934" ^
 let product l = List.fold ~init:1 ~f:( * ) l
 
 let max_multiply n =
-  let digits: int list = List.map ~f:int_of_string (Str.split (Str.regexp "") data) in
+  let digits = List.map ~f:int_of_string (Str.split (Str.regexp "") data) in
     let rec find_max_multiple current rest max = match current, rest with
       | ([], hd::tl) -> find_max_multiple [hd] tl max
       | (current, []) ->  let current_product = product current in
