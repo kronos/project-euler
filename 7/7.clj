@@ -25,6 +25,3 @@
 ;           (cons next_prime (primes_seq (conj primes next_prime) (+ 2 next_prime)))
 ;           (primes_seq primes (+ 2 next_prime)))))
 ;     [2 3] 5)))
-
-
-
