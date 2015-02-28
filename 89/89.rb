@@ -13,7 +13,7 @@ ROMAN = ROMAN_TO_ARABIC.keys
 def to_roman(number)
   return "-#{to_roman(-number)}" if number < 0
   if number > 3999
-    return "M"*(number / 1000 - 3) + to_roman(3000 + number % 1000)
+    return "M"*(number / 1000) + to_roman(number % 1000)
   end
 
   index = 0
